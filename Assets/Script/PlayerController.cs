@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ISavable
 {
 
     private Vector3 targetMovementDirection;
@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector3[] muzzlePoints;
     private int muzzleIndex = 0;
     private float lastShotTime = 0;
-
-    // Update is called once per frame
+    private void Start()
+    {
+        GameSession.Instance.OnDataLoad += SetDataValues;
+    }
     void Update()
     {
         targetMovementDirection = Vector3.zero;
@@ -27,8 +29,25 @@ public class PlayerController : MonoBehaviour
             Shoot();
         }
         transform.position = Vector3.MoveTowards(transform.position, transform.position + targetMovementDirection, movementSpeed) ;
-    }
 
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            GameSession.Instance.sessionData._position = transform.position;
+            GameSession.Instance.SaveData("Savefile2");
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            GameSession.Instance.LoadData("Savefile2");
+        }
+    }
+    public void GetDataValues()
+    {
+        GameSession.Instance.sessionData._position = transform.position;
+    }
+    public void SetDataValues()
+    {
+        transform.position = GameSession.Instance.sessionData._position;
+    }
     private void Shoot()
     {
 
