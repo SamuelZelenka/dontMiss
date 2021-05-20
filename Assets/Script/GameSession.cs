@@ -27,7 +27,6 @@ public class GameSession : MonoBehaviour
 
     private void Awake()
     {
-        sessionData = new DataContainer();
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);

@@ -21,7 +21,8 @@ public static class SaveSystem
         string data = GetDataString(saveName);
         return JsonUtility.FromJson<DataContainer>(data);
     }
-    private static string GetDataString(string saveName)
+    public static DirectoryInfo GetDirectoryInfo() => new DirectoryInfo(SAVE_DIRECTORY);
+    public static string GetDataString(string saveName)
     {
         saveName = SAVE_DIRECTORY + saveName + ".rekt";
         if (File.Exists(saveName))
@@ -30,4 +31,5 @@ public static class SaveSystem
         }
         return null;
     }
+
 }

@@ -7,5 +7,6 @@ using UnityEngine;
 [Serializable]
 public class DataContainer
 {
-    public Vector3 _position;
+    public string vesselName;
+    public Vector3 position;
 }
