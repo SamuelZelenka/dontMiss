@@ -8,5 +8,8 @@ using UnityEngine;
 public class DataContainer
 {
     public string vesselName;
+    public int vesselHP;
+    public int vesselArmor;
+    public int money;
     public Vector3 position;
 }

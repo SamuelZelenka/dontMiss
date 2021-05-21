@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class GameSession : MonoBehaviour
 {
     public delegate void GameSessionHandler();
@@ -35,5 +36,6 @@ public class GameSession : MonoBehaviour
         {
             _instance = this;
         }
+        DontDestroyOnLoad(this.gameObject);
     }
 }

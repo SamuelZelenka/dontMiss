@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, ISavable
 {
-    private string _vesselName;
     private Vector3 targetMovementDirection;
     [SerializeField] private float movementSpeed = 2;
     [SerializeField] WeaponTemplate weapon;
@@ -32,12 +31,11 @@ public class PlayerController : MonoBehaviour, ISavable
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GameSession.Instance.sessionData.position = transform.position;
-            GameSession.Instance.SaveData(_vesselName);
+            GameSession.Instance.SaveData(GameSession.Instance.sessionData.vesselName);
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameSession.Instance.LoadData(_vesselName);
+            GameSession.Instance.LoadData(GameSession.Instance.sessionData.vesselName);
         }
     }
     public void GetDataValues()
@@ -46,7 +44,6 @@ public class PlayerController : MonoBehaviour, ISavable
     }
     public void SetDataValues()
     {
-        _vesselName = GameSession.Instance.sessionData.vesselName;
         transform.position = GameSession.Instance.sessionData.position;
     }
     private void Shoot()
