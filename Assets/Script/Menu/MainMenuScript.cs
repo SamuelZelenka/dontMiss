@@ -9,6 +9,11 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] private Transform _vesselGrid;
     [SerializeField] private VesselLoader _vesselLoaderPrefab;
 
+    [Header("On Selected Vessel")]
+    [SerializeField] private GameObject _startButton;
+    [SerializeField] private GameObject _deleteButton;
+
+
     [Header("Vessel Info")]
     [SerializeField] private Text _vesselName;
     [SerializeField] private Text _vesselHP;
@@ -19,37 +24,61 @@ public class MainMenuScript : MonoBehaviour
     {
         FindObjectOfType<GameSession>().OnDataLoad += UpdateVesselInfo;
     }
-    private void OnDisable()
-    {
-        FindObjectOfType<GameSession>().OnDataLoad -= UpdateVesselInfo;
-    }
 
     public void NewGame()
     {
-        DataContainer newData = new DataContainer();
-        newData.vesselName = _nameInput.text;
-        newData.vesselHP = 100;
-        newData.vesselArmor = 100;
-        newData.money = 800;
-        if (newData.vesselName.Length > 3)
+        if (_nameInput.text != "" && _nameInput.text.Length > 3)
         {
+            DataContainer newData = new DataContainer();
+
+            newData.vesselName = _nameInput.text;
+            newData.vesselHP = 100;
+            newData.vesselArmor = 100;
+            newData.money = 800;
+
             SaveSystem.SaveData(newData, newData.vesselName);
-            SaveSystem.LoadData(newData.vesselName);
+            GameSession.Instance.LoadData(newData.vesselName);
+            
+            UpdateVesselInfo();
         }
-        UpdateVesselInfo();
+    }
+    public void DeleteCurrentVessel()
+    {
+        if (File.Exists(SaveSystem.SAVE_DIRECTORY + GameSession.Instance.sessionData.vesselName + ".rekt"))
+        {
+            File.Delete(SaveSystem.SAVE_DIRECTORY + GameSession.Instance.sessionData.vesselName + ".rekt");
+            GameSession.Instance.sessionData = null;
+            UpdateVesselInfo();
+            DisplaySavedVessels();
+        }
     }
     public void UpdateVesselInfo()
     {
-        _vesselName.text = GameSession.Instance.sessionData.vesselName;
-        _vesselHP.text = GameSession.Instance.sessionData.vesselHP.ToString();
-        _vesselArmor.text = GameSession.Instance.sessionData.vesselArmor.ToString();
-        _money.text = GameSession.Instance.sessionData.money.ToString();
+        if (GameSession.Instance.sessionData != null)
+        {
+            _vesselName.text = GameSession.Instance.sessionData.vesselName;
+            _vesselHP.text = GameSession.Instance.sessionData.vesselHP.ToString();
+            _vesselArmor.text = GameSession.Instance.sessionData.vesselArmor.ToString();
+            _money.text = GameSession.Instance.sessionData.money.ToString();
+            _deleteButton.SetActive(true);
+            _startButton.SetActive(true);
+        }
+        else
+        {
+            _vesselName.text = "";
+            _vesselHP.text = "";
+            _vesselArmor.text = "";
+            _money.text = "";
+            _deleteButton.SetActive(false);
+            _startButton.SetActive(false);
+        }
     }
     public void DisplaySavedVessels()
     {
         DirectoryInfo directoryInfo = new DirectoryInfo(SaveSystem.SAVE_DIRECTORY);
         FileInfo[] saveFiles = directoryInfo.GetFiles("*.rekt");
-        
+
+        Utility.DestroyChildObjects(_vesselGrid);
         foreach (FileInfo fileInfo in saveFiles)
         {
             if (fileInfo != null)
