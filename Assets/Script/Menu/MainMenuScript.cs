@@ -1,10 +1,14 @@
 using System.IO;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
 
 public class MainMenuScript : MonoBehaviour
 {
+
+    private GameSession currentSession;
+
     [SerializeField] private InputField _nameInput;
     [SerializeField] private Transform _vesselGrid;
     [SerializeField] private VesselLoader _vesselLoaderPrefab;
@@ -22,7 +26,20 @@ public class MainMenuScript : MonoBehaviour
 
     private void Awake()
     {
-        FindObjectOfType<GameSession>().OnDataLoad += UpdateVesselInfo;
+        currentSession = FindObjectOfType<GameSession>();
+        currentSession.OnDataLoad += UpdateVesselInfo;
+    }
+    private void OnDisable()
+    {
+        currentSession.OnDataLoad -= UpdateVesselInfo;
+    }
+
+    public void StartGame()
+    {
+        if (GameSession.Instance.sessionData.VesselName != null || GameSession.Instance.sessionData.VesselName != "")
+        {
+            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+        }
     }
 
     public void NewGame()
@@ -31,35 +48,37 @@ public class MainMenuScript : MonoBehaviour
         {
             DataContainer newData = new DataContainer();
 
-            newData.vesselName = _nameInput.text;
-            newData.vesselHP = 100;
-            newData.vesselArmor = 100;
-            newData.money = 800;
+            newData.MaxVesselHP = 100;
+            newData.MaxVesselArmor = 100;
+            newData.VesselName = _nameInput.text;
+            newData.VesselHP = 100;
+            newData.VesselArmor = 100;
+            newData.Money = 800;
+            newData.MovementSpeed = 3;
 
-            SaveSystem.SaveData(newData, newData.vesselName);
-            GameSession.Instance.LoadData(newData.vesselName);
+            SaveSystem.SaveData(newData, newData.VesselName);
+            GameSession.Instance.LoadData(newData.VesselName);
             
             UpdateVesselInfo();
         }
     }
-    public void DeleteCurrentVessel()
+    public void DeleteVesselButton()
     {
-        if (File.Exists(SaveSystem.SAVE_DIRECTORY + GameSession.Instance.sessionData.vesselName + ".rekt"))
+        if (GameSession.DeleteCurrentVessel())
         {
-            File.Delete(SaveSystem.SAVE_DIRECTORY + GameSession.Instance.sessionData.vesselName + ".rekt");
-            GameSession.Instance.sessionData = null;
             UpdateVesselInfo();
             DisplaySavedVessels();
         }
     }
+
     public void UpdateVesselInfo()
     {
         if (GameSession.Instance.sessionData != null)
         {
-            _vesselName.text = GameSession.Instance.sessionData.vesselName;
-            _vesselHP.text = GameSession.Instance.sessionData.vesselHP.ToString();
-            _vesselArmor.text = GameSession.Instance.sessionData.vesselArmor.ToString();
-            _money.text = GameSession.Instance.sessionData.money.ToString();
+            _vesselName.text = GameSession.Instance.sessionData.VesselName;
+            _vesselHP.text = "Health: " + GameSession.Instance.sessionData.VesselHP.ToString();
+            _vesselArmor.text = "Armor: " + GameSession.Instance.sessionData.VesselArmor.ToString();
+            _money.text = "$" + GameSession.Instance.sessionData.Money.ToString();
             _deleteButton.SetActive(true);
             _startButton.SetActive(true);
         }
@@ -89,7 +108,7 @@ public class MainMenuScript : MonoBehaviour
 
                 DataContainer data = JsonUtility.FromJson<DataContainer>(saveString);
 
-                vessel.vesselName.text = data.vesselName;
+                vessel.vesselName.text = data.VesselName;
             }
         }
     }

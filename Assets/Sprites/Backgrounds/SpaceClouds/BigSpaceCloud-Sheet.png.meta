@@ -1,0 +1,345 @@
+fileFormatVersion: 2
+guid: eb9017c9203ffa34484e8bf5b0f62f11
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5757320507481725354
+    second: BigSpaceCloud-Sheet_0
+  - first:
+      213: 1626577152170843137
+    second: BigSpaceCloud-Sheet_1
+  - first:
+      213: -8382366999746885212
+    second: BigSpaceCloud-Sheet_2
+  - first:
+      213: 1266140272338975140
+    second: BigSpaceCloud-Sheet_3
+  - first:
+      213: -498156540345037522
+    second: BigSpaceCloud-Sheet_4
+  - first:
+      213: 4707147212432869207
+    second: BigSpaceCloud-Sheet_5
+  - first:
+      213: 6641040608963339584
+    second: BigSpaceCloud-Sheet_6
+  - first:
+      213: -4398906972306296298
+    second: BigSpaceCloud-Sheet_7
+  - first:
+      213: -9170337076276711681
+    second: BigSpaceCloud-Sheet_8
+  - first:
+      213: -7740901238475591511
+    second: BigSpaceCloud-Sheet_9
+  - first:
+      213: -433428771807077445
+    second: BigSpaceCloud-Sheet_10
+  - first:
+      213: 6898686542100506647
+    second: BigSpaceCloud-Sheet_11
+  - first:
+      213: -6612584559497810695
+    second: BigSpaceCloud-Sheet_12
+  - first:
+      213: 1386155713015927910
+    second: BigSpaceCloud-Sheet_13
+  - first:
+      213: 8408422336227569235
+    second: BigSpaceCloud-Sheet_14
+  - first:
+      213: -3803427209420640470
+    second: BigSpaceCloud-Sheet_15
+  - first:
+      213: -8034439341719328489
+    second: BigSpaceCloud-Sheet_16
+  - first:
+      213: 659748649568764931
+    second: BigSpaceCloud-Sheet_17
+  - first:
+      213: 215342254080124096
+    second: BigSpaceCloud-Sheet_18
+  - first:
+      213: 4212283572244665011
+    second: BigSpaceCloud-Sheet_19
+  - first:
+      213: 6286651373115867804
+    second: BigSpaceCloud-Sheet_20
+  - first:
+      213: -4095563071874930520
+    second: BigSpaceCloud-Sheet_21
+  - first:
+      213: 1629842205634290482
+    second: BigSpaceCloud-Sheet_22
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: BigSpaceCloud-Sheet_0
+      rect:
+        serializedVersion: 2
+        x: 3814
+        y: 32
+        width: 584
+        height: 293
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 656ea758083e910b0800000000000000
+      internalID: -5757320507481725354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigSpaceCloud-Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1499
+        y: 44
+        width: 251
+        height: 269
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a9412b10a9dbab80800000000000000
+      internalID: -8382366999746885212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigSpaceCloud-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 30
+        width: 236
+        height: 268
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 757088e3375235140800000000000000
+      internalID: 4707147212432869207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigSpaceCloud-Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 2749
+        y: 64
+        width: 241
+        height: 242
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffeaee1040b6cb080800000000000000
+      internalID: -9170337076276711681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigSpaceCloud-Sheet_11
+      rect:
+        serializedVersion: 2
+        x: 4447
+        y: 15
+        width: 556
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7182ba6fbde0dbf50800000000000000
+      internalID: 6898686542100506647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigSpaceCloud-Sheet_12
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 67
+        width: 266
+        height: 221
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fc66ebc0616b34a0800000000000000
+      internalID: -6612584559497810695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigSpaceCloud-Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 2124
+        y: 44
+        width: 258
+        height: 237
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2f6d6dba13873bc0800000000000000
+      internalID: -3803427209420640470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BigSpaceCloud-Sheet_17
+      rect:
+        serializedVersion: 2
+        x: 3332
+        y: 47
+        width: 261
+        height: 239
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 304079ab6e5e72900800000000000000
+      internalID: 659748649568764931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

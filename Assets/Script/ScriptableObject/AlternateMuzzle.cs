@@ -13,10 +13,12 @@ public class AlternateMuzzle : WeaponTemplate
     [SerializeField] WeaponProjectile projectilePrefab;
 
     public override float GetFireRate() => fireRate;
+    public override int GetDamage() => damage;
 
-    public override void Shoot(Vector3 muzzle)
+    public override WeaponProjectile Shoot(Vector3 muzzle , bool isPlayer)
     {
         WeaponProjectile projectile = Instantiate(projectilePrefab, muzzle, Quaternion.Euler(Vector3.zero));
-        projectile.Init(lifetime, speed);
+        projectile.Init(lifetime, speed, damage, isPlayer);
+        return projectile;
     }
 }

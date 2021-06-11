@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class GameSession : MonoBehaviour
 {
+    public delegate void GameDataHandler();
     public delegate void GameSessionHandler();
     public GameSessionHandler OnDataLoad;
+    public GameDataHandler OnStatsChange;
+
 
     List<ISavable> savableObjects = new List<ISavable>();
 
@@ -25,9 +28,21 @@ public class GameSession : MonoBehaviour
         sessionData = SaveSystem.LoadData(saveName);
         OnDataLoad?.Invoke();
     }
+    public static bool DeleteCurrentVessel()
+    {
+        string path = SaveSystem.SAVE_DIRECTORY + _instance.sessionData.VesselName + ".rekt";
+        if (File.Exists(path))
+        {
+            File.Delete(path);
+            GameSession.Instance.sessionData = null;
+            return true;
+        }
+        return false;
+    }
 
     private void Awake()
     {
+        LoadData(sessionData.VesselName);
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);

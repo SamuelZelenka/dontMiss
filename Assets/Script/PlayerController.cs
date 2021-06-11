@@ -2,55 +2,95 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, ISavable
+public class PlayerController : MonoBehaviour, ISavable , IDamagable
 {
-    private Vector3 targetMovementDirection;
-    [SerializeField] private float movementSpeed = 2;
-    [SerializeField] WeaponTemplate weapon;
-    [SerializeField] Vector3[] muzzlePoints;
-    private int muzzleIndex = 0;
-    private float lastShotTime = 0;
+    private Vector3 _minMovementPos;
+    private Vector3 _maxMovementPos;
+    private Vector3 _targetMovementDirection;
+    private Vector3 _targetMovementPosition;
+
+    private int _muzzleIndex = 0;
+    private float _lastShotTime = 0;
+    private SpriteRenderer _spriteRenderer;
+
+    [SerializeField] private WeaponTemplate _weapon;
+    [SerializeField] private Vector3[] _muzzlePoints;
+
+
+    private DataContainer Data => GameSession.Instance.sessionData;
+    private void Awake()
+    {
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+    }
     private void Start()
     {
-        GameSession.Instance.OnDataLoad += SetDataValues;
+        _minMovementPos = Camera.main.ScreenToWorldPoint(Vector3.zero);
+        _maxMovementPos = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, Camera.main.pixelHeight, 0));
     }
     void Update()
     {
-        targetMovementDirection = Vector3.zero;
+        _targetMovementDirection = Vector3.zero;
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            targetMovementDirection += Vector3.right * Input.GetAxis("Horizontal") * movementSpeed * Time.deltaTime;
-            targetMovementDirection += Vector3.up * Input.GetAxis("Vertical") * movementSpeed * Time.deltaTime;
+            _targetMovementDirection += Vector3.right * Input.GetAxis("Horizontal") * Data.MovementSpeed * Time.deltaTime;
+            _targetMovementDirection += Vector3.up * Input.GetAxis("Vertical") * Data.MovementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.Space) && Time.time > lastShotTime + weapon.GetFireRate()/muzzlePoints.Length)
+        if (Input.GetKey(KeyCode.Space) && Time.time > _lastShotTime + _weapon.GetFireRate() / _muzzlePoints.Length)
         {
-            lastShotTime = Time.time;
+            _lastShotTime = Time.time;
             Shoot();
         }
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + targetMovementDirection, movementSpeed) ;
+        ClampPosition();
+        transform.position = Vector3.MoveTowards(transform.position, _targetMovementPosition, Data.MovementSpeed) ;
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GameSession.Instance.SaveData(GameSession.Instance.sessionData.vesselName);
+            GameSession.Instance.SaveData(Data.VesselName);
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            GameSession.Instance.LoadData(GameSession.Instance.sessionData.vesselName);
+            GameSession.Instance.LoadData(Data.VesselName);
         }
     }
     public void GetDataValues()
     {
-        GameSession.Instance.sessionData.position = transform.position;
+        GameSession.Instance.sessionData.Position = transform.position;
     }
-    public void SetDataValues()
+    public void TakeDamage(int damage)
     {
-        transform.position = GameSession.Instance.sessionData.position;
+        if (GameSession.Instance.sessionData.VesselHP <= 1)
+        {
+            UIViewer.EnableDeathOverlay();
+            EffectManager.mediumExplosion?.Invoke(transform.position);
+
+            //Do not delete debug files even if death occurs
+            if (!GameSession.Instance.sessionData.IsDebugMode)
+            {
+                GameSession.DeleteCurrentVessel();
+            }
+            Destroy(gameObject);
+            return;
+        }
+        GameSession.Instance.sessionData.VesselHP -= damage;
+        _spriteRenderer.color = Color.red;
+        StartCoroutine(TakeDamageEffect.DamageEffect(_spriteRenderer));
     }
     private void Shoot()
     {
+        _muzzleIndex = ((_muzzleIndex + 1) % _muzzlePoints.Length);
+        _weapon.Shoot(transform.position + _muzzlePoints[_muzzleIndex], true).player = this;
+    }
+    private void ClampPosition()
+    {
+        Rect cameraRect = new Rect(
+            _minMovementPos.x,
+            _minMovementPos.y,
+            _maxMovementPos.x - _minMovementPos.x,
+            _maxMovementPos.y - _minMovementPos.y
+            );
 
-        muzzleIndex = ((muzzleIndex + 1) % muzzlePoints.Length);
-        weapon.Shoot(transform.position + muzzlePoints[muzzleIndex]);
+        _targetMovementPosition.x = Mathf.Clamp(transform.position.x + _targetMovementDirection.x , cameraRect.xMin, cameraRect.xMax);
+        _targetMovementPosition.y = Mathf.Clamp(transform.position.y + _targetMovementDirection.y, cameraRect.yMin, cameraRect.yMax);
     }
 }
 

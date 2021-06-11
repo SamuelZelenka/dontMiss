@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class WeaponTemplate : ScriptableObject
 {
-    public abstract void Shoot(Vector3 muzzles);
+    public abstract WeaponProjectile Shoot(Vector3 muzzles, bool isPlayer);
     public abstract float GetFireRate();
+    public abstract int GetDamage();
 }
