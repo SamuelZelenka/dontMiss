@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class DataContainer
+public class SessionDataContainer
 {
     public bool IsDebugMode => _isDebugMode;
     public string VesselName 
@@ -121,6 +121,17 @@ public class DataContainer
             _position = value;
         }
     }
+    public MissionProgressionData Missions
+    {
+        get
+        {
+            return _missions;
+        }
+        set
+        {
+            _missions = value;
+        }
+    }
 
     [SerializeField] private bool _isDebugMode = false;
     [SerializeField] private string _vesselName;
@@ -131,4 +142,5 @@ public class DataContainer
     [SerializeField] private int _money;
     [SerializeField] private float _movementSpeed;
     [SerializeField] private Vector3 _position;
+    [SerializeField] private MissionProgressionData _missions;
 }

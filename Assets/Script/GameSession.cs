@@ -17,7 +17,7 @@ public class GameSession : MonoBehaviour
     private static GameSession _instance;
     public static GameSession Instance { get { return _instance; } }
 
-    public DataContainer sessionData;
+    public SessionDataContainer sessionData;
 
     public void SaveData(string saveName)
     {

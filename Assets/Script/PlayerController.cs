@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour, ISavable , IDamagable
     [SerializeField] private Vector3[] _muzzlePoints;
 
 
-    private DataContainer Data => GameSession.Instance.sessionData;
+    private SessionDataContainer Data => GameSession.Instance.sessionData;
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();

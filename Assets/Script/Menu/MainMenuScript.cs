@@ -38,7 +38,7 @@ public class MainMenuScript : MonoBehaviour
     {
         if (GameSession.Instance.sessionData.VesselName != null || GameSession.Instance.sessionData.VesselName != "")
         {
-            SceneManager.LoadScene("GameScene", LoadSceneMode.Single);
+            SceneManager.LoadScene("MissionSelect", LoadSceneMode.Single);
         }
     }
 
@@ -46,7 +46,7 @@ public class MainMenuScript : MonoBehaviour
     {
         if (_nameInput.text != "" && _nameInput.text.Length > 3)
         {
-            DataContainer newData = new DataContainer();
+            SessionDataContainer newData = new SessionDataContainer();
 
             newData.MaxVesselHP = 100;
             newData.MaxVesselArmor = 100;
@@ -55,6 +55,8 @@ public class MainMenuScript : MonoBehaviour
             newData.VesselArmor = 100;
             newData.Money = 800;
             newData.MovementSpeed = 3;
+            newData.Missions = new MissionProgressionData();
+            newData.Missions.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2), "Home");
 
             SaveSystem.SaveData(newData, newData.VesselName);
             GameSession.Instance.LoadData(newData.VesselName);
@@ -106,7 +108,7 @@ public class MainMenuScript : MonoBehaviour
                 VesselLoader vessel = Instantiate(_vesselLoaderPrefab);
                 vessel.transform.SetParent(_vesselGrid);
 
-                DataContainer data = JsonUtility.FromJson<DataContainer>(saveString);
+                SessionDataContainer data = JsonUtility.FromJson<SessionDataContainer>(saveString);
 
                 vessel.vesselName.text = data.VesselName;
             }

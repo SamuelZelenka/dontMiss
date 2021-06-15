@@ -6,7 +6,7 @@ public static class SaveSystem
 {
     public static readonly string SAVE_DIRECTORY = Application.dataPath + "/Saves/";
     private const string SAVE_SEPARATOR = "#SAVE-VALUE#";
-    public static void SaveData(DataContainer data, string saveName)
+    public static void SaveData(SessionDataContainer data, string saveName)
     {
         if (!Directory.Exists(SAVE_DIRECTORY))
         {
@@ -16,10 +16,10 @@ public static class SaveSystem
         File.WriteAllText(SAVE_DIRECTORY + saveName + ".rekt", json);
         Debug.Log("Saved");
     }
-    public static DataContainer LoadData(string saveName) 
+    public static SessionDataContainer LoadData(string saveName) 
     {
         string data = GetDataString(saveName);
-        return JsonUtility.FromJson<DataContainer>(data);
+        return JsonUtility.FromJson<SessionDataContainer>(data);
     }
     public static DirectoryInfo GetDirectoryInfo() => new DirectoryInfo(SAVE_DIRECTORY);
     public static string GetDataString(string saveName)
