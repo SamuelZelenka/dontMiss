@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, ISavable , IDamagable
+public class PlayerController : MonoBehaviour, IDamagable
 {
     private Vector3 _minMovementPos;
     private Vector3 _maxMovementPos;
@@ -16,10 +16,13 @@ public class PlayerController : MonoBehaviour, ISavable , IDamagable
     [SerializeField] private WeaponTemplate _weapon;
     [SerializeField] private Vector3[] _muzzlePoints;
 
+    [SerializeField] private UIViewer _ui;
+
 
     private SessionDataContainer Data => GameSession.Instance.sessionData;
     private void Awake()
     {
+        _ui = FindObjectOfType<UIViewer>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
     }
     private void Start()
@@ -52,15 +55,11 @@ public class PlayerController : MonoBehaviour, ISavable , IDamagable
             GameSession.Instance.LoadData(Data.VesselName);
         }
     }
-    public void GetDataValues()
-    {
-        GameSession.Instance.sessionData.Position = transform.position;
-    }
     public void TakeDamage(int damage)
     {
         if (GameSession.Instance.sessionData.VesselHP <= 1)
         {
-            UIViewer.EnableDeathOverlay();
+            _ui.EnableDeathOverlay();
             EffectManager.mediumExplosion?.Invoke(transform.position);
 
             //Do not delete debug files even if death occurs
@@ -92,6 +91,7 @@ public class PlayerController : MonoBehaviour, ISavable , IDamagable
         _targetMovementPosition.x = Mathf.Clamp(transform.position.x + _targetMovementDirection.x , cameraRect.xMin, cameraRect.xMax);
         _targetMovementPosition.y = Mathf.Clamp(transform.position.y + _targetMovementDirection.y, cameraRect.yMin, cameraRect.yMax);
     }
+    public void SetUi(UIViewer ui) => _ui = ui;
 }
 
 

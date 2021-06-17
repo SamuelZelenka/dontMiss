@@ -38,7 +38,10 @@ public class ZUtilityCamera : MonoBehaviour
         InputHandler();
         UpdatePosition();
     }
-
+    public void SetPosition(Vector3 pos)
+    {
+        cameraTransform.cameraPosition = pos;
+    }
     public void SetBoundries(Vector3 min, Vector3 max)
     {
         minPos = min;
@@ -49,7 +52,6 @@ public class ZUtilityCamera : MonoBehaviour
         minPos = min.position;
         maxPos = max.position;
     }
-
     public void SetCamera(Camera camera)
     {
         activeCamera = camera;

@@ -11,21 +11,9 @@ public class UIViewer : MonoBehaviour
     [SerializeField] GameObject _deathOverlay;
     [SerializeField] GameObject _winOverlay;
 
-
-    private static UIViewer _instance;
-
-    public static UIViewer Instance => _instance;
-
     private void Awake()
     {
-        if (_instance != null && _instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            _instance = this;
-        }
+        FindObjectOfType<PlayerController>().SetUi(this);
     }
     private void OnEnable()
     {
@@ -37,9 +25,8 @@ public class UIViewer : MonoBehaviour
         GameSession.Instance.OnStatsChange -= UpdateHealthBar;
     }
 
-    public static void EnableDeathOverlay() => _instance._deathOverlay.SetActive(true);
-    public static void EnableWinOverlay() => _instance._winOverlay.SetActive(true);
-
+    public void EnableDeathOverlay() =>_deathOverlay.SetActive(true);
+    public void EnableWinOverlay() => _winOverlay.SetActive(true);
 
     public void UpdateHealthBar()
     {

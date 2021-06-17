@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class MissionProgressionData 
 {
-    private List<MissionData> _missions;
+    [SerializeField] private Vector2Int _playerPos;
+    [SerializeField] private List<MissionData> _missions;
     public int Count => _missions.Count;
     public void AddMission(Vector2Int pos, string missionName)
     {
@@ -15,10 +17,26 @@ public class MissionProgressionData
         _missions.Add(new MissionData(pos, missionName));
     }
     public MissionData GetMission(int index) => _missions[index];
+    public MissionData GetMissionAt(Vector2Int pos)
+    {
+        foreach (MissionData mission in _missions)
+        {
+            if (mission.position == pos)
+            {
+                return mission;
+            }
+        }
+        return new MissionData();
+    }
+    public void SetPlayerPos(Vector2Int pos)
+    {
+        _playerPos = pos;
+    }
+    public Vector2Int GetPlayerPos() => _playerPos;
 }
 
 [System.Serializable]
-public class MissionData
+public struct MissionData
 {
     public bool visited;
     public Vector2Int position;
@@ -28,7 +46,6 @@ public class MissionData
     {
         visited = false;
         position = pos;
-        missionName = missionName;
+        this.missionName = missionName;
     }
-
 }

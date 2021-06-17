@@ -150,7 +150,7 @@ namespace ZUtility.Unity
         #region WorldPosition
         /// <summary>Get world position of a grid coordinate.
         /// </summary>
-
+        public Vector3 GetWorldPosition(Vector2Int pos) => GetWorldPosition(pos.x, pos.y);
         public Vector3 GetWorldPosition(int x, int y)
         {
             return new Vector3(x, y) * cellSize + originPosition;

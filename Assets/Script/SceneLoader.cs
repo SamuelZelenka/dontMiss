@@ -2,20 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneLoader : MonoBehaviour
+public abstract class SceneLoader : MonoBehaviour
 {
+    [SerializeField] protected string[] Scenes;
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("GameUI", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Background", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-        Debug.LogWarning("DEBUG SCENE IS MANUALLY LOADED");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("DebugMission", UnityEngine.SceneManagement.LoadSceneMode.Additive);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (string sceneName in Scenes)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName, UnityEngine.SceneManagement.LoadSceneMode.Additive);
+            if (sceneName.Contains("DebugMission"))
+            {
+                Debug.LogWarning("DEBUG SCENE IS MANUALLY LOADED");
+            }
+        }
     }
 }

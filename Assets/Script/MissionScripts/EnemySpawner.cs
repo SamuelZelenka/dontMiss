@@ -13,6 +13,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int _maxEnemyCount = 1;
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private PathCreator _path;
+    [SerializeField] private UIViewer _ui;
 
     public int AliveEnemyCount => _aliveEnemies.Count;
     public int TotalEnemyCount => _totalEnemyCount;
@@ -21,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake()
     {
+        _ui = FindObjectOfType<UIViewer>();
         _missionObjective = GetComponent<MissionObjective>();
         StartCoroutine("SpawnEnemy");
     }
@@ -31,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
         _aliveEnemies.Remove(enemy);
         if (_missionObjective.IsCompleted())
         {
-            UIViewer.EnableWinOverlay();
+            _ui.EnableWinOverlay();
         }
     }
 

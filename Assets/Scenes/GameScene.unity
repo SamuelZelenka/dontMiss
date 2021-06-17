@@ -159,6 +159,7 @@ MonoBehaviour:
   _muzzlePoints:
   - {x: -0.651, y: 0.207, z: 0}
   - {x: 0.651, y: 0.207, z: 0}
+  _ui: {fileID: 0}
 --- !u!212 &1667264288
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -364,8 +365,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1989268601}
-  - component: {fileID: 1989268600}
   - component: {fileID: 1989268602}
+  - component: {fileID: 1989268600}
   m_Layer: 0
   m_Name: Game Main
   m_TagString: Untagged
@@ -382,9 +383,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989268599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa09d70b027d5a542b16502c06b707f7, type: 3}
+  m_Script: {fileID: 11500000, guid: 82799b321199c53459e8b90384f9aff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Scenes:
+  - GameUI
+  - Background
 --- !u!4 &1989268601
 Transform:
   m_ObjectHideFlags: 0

@@ -18,6 +18,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Backgrounds/Background.unity
     guid: 68b0a796c6687ef46bfeee80ccd90d88
   - enabled: 1
+    path: Assets/Scenes/MissionSelect.unity
+    guid: 98336a00267ebd445a483ba1a3712f5f
+  - enabled: 1
+    path: Assets/Scenes/MissionSelectUI.unity
+    guid: 44a09cfffa687af4cafaf6ce5e71f3ee
+  - enabled: 1
     path: Assets/Scenes/Missions/DebugMission.unity
     guid: 3e87a48d4b28f264f9bbae794639cac2
+  - enabled: 1
+    path: Assets/Scenes/Missions/DebugMission2.unity
+    guid: 9e41a940d7d4027439a2942354264abb
   m_configObjects: {}

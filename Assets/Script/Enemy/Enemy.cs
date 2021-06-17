@@ -34,13 +34,10 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         HP -= damage;
         if (HP <= 0)
         {
+            OnDeath?.Invoke(this);
             Destroy(gameObject);
         }
         spriteRenderer.color = Color.red;
         StartCoroutine(TakeDamageEffect.DamageEffect(spriteRenderer));
-    }
-    private void OnDestroy()
-    {
-        OnDeath?.Invoke(this);
     }
 }

@@ -10,9 +10,7 @@ public class GameSession : MonoBehaviour
     public delegate void GameSessionHandler();
     public GameSessionHandler OnDataLoad;
     public GameDataHandler OnStatsChange;
-
-
-    List<ISavable> savableObjects = new List<ISavable>();
+    public string currentMission;
 
     private static GameSession _instance;
     public static GameSession Instance { get { return _instance; } }
@@ -21,16 +19,16 @@ public class GameSession : MonoBehaviour
 
     public void SaveData(string saveName)
     {
-        SaveSystem.SaveData(sessionData, saveName);
+        SaveSystem.SaveSessionData(sessionData, saveName);
     }
     public void LoadData(string saveName)
     {
-        sessionData = SaveSystem.LoadData(saveName);
+        sessionData = SaveSystem.LoadSessionData(saveName);
         OnDataLoad?.Invoke();
     }
     public static bool DeleteCurrentVessel()
     {
-        string path = SaveSystem.SAVE_DIRECTORY + _instance.sessionData.VesselName + ".rekt";
+        string path = SaveSystem.SESSION_SAVE_DIRECTORY + _instance.sessionData.VesselName + ".rekt";
         if (File.Exists(path))
         {
             File.Delete(path);

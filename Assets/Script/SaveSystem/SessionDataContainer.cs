@@ -110,26 +110,15 @@ public class SessionDataContainer
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
-    public Vector3 Position
+    public MissionProgressionData MissionProgression
     {
         get
         {
-            return _position;
+            return _missionProgression;
         }
         set
         {
-            _position = value;
-        }
-    }
-    public MissionProgressionData Missions
-    {
-        get
-        {
-            return _missions;
-        }
-        set
-        {
-            _missions = value;
+            _missionProgression = value;
         }
     }
 
@@ -141,6 +130,5 @@ public class SessionDataContainer
     [SerializeField] private int _vesselArmor;
     [SerializeField] private int _money;
     [SerializeField] private float _movementSpeed;
-    [SerializeField] private Vector3 _position;
-    [SerializeField] private MissionProgressionData _missions;
+    [SerializeField] private MissionProgressionData _missionProgression;
 }

@@ -55,10 +55,21 @@ public class MainMenuScript : MonoBehaviour
             newData.VesselArmor = 100;
             newData.Money = 800;
             newData.MovementSpeed = 3;
-            newData.Missions = new MissionProgressionData();
-            newData.Missions.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2), "Home");
+          
+            newData.MissionProgression = new MissionProgressionData();
+            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2), "DebugMission");
+            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2 + 1, MissionGrid.GRIDSIZE / 2), "DebugMission2");
+            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2 + 2, MissionGrid.GRIDSIZE / 2), "DebugMission");
+            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2 + 3, MissionGrid.GRIDSIZE / 2), "DebugMission2");
 
-            SaveSystem.SaveData(newData, newData.VesselName);
+            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2 + 1), "DebugMission2");
+            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2 + 2), "DebugMission");
+            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2 + 3), "DebugMission2");
+
+
+            newData.MissionProgression.SetPlayerPos(newData.MissionProgression.GetMission(0).position);
+
+            SaveSystem.SaveSessionData(newData, newData.VesselName);
             GameSession.Instance.LoadData(newData.VesselName);
             
             UpdateVesselInfo();
@@ -96,7 +107,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void DisplaySavedVessels()
     {
-        DirectoryInfo directoryInfo = new DirectoryInfo(SaveSystem.SAVE_DIRECTORY);
+        DirectoryInfo directoryInfo = new DirectoryInfo(SaveSystem.SESSION_SAVE_DIRECTORY);
         FileInfo[] saveFiles = directoryInfo.GetFiles("*.rekt");
 
         Utility.DestroyChildObjects(_vesselGrid);
