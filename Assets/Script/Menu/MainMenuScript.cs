@@ -28,6 +28,7 @@ public class MainMenuScript : MonoBehaviour
     {
         currentSession = FindObjectOfType<GameSession>();
         currentSession.OnDataLoad += UpdateVesselInfo;
+        UpdateVesselInfo();
     }
     private void OnDisable()
     {
@@ -58,18 +59,10 @@ public class MainMenuScript : MonoBehaviour
           
             newData.MissionProgression = new MissionProgressionData();
             newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2), "DebugMission");
-            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2 + 1, MissionGrid.GRIDSIZE / 2), "DebugMission2");
-            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2 + 2, MissionGrid.GRIDSIZE / 2), "DebugMission");
-            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2 + 3, MissionGrid.GRIDSIZE / 2), "DebugMission2");
-
-            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2 + 1), "DebugMission2");
-            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2 + 2), "DebugMission");
-            newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2 + 3), "DebugMission2");
-
 
             newData.MissionProgression.SetPlayerPos(newData.MissionProgression.GetMission(0).position);
 
-            SaveSystem.SaveSessionData(newData, newData.VesselName);
+            SaveSystem.SaveSessionData(newData);
             GameSession.Instance.LoadData(newData.VesselName);
             
             UpdateVesselInfo();

@@ -12,6 +12,7 @@ public class MissionSelectUIViewer : MonoBehaviour
 
     private void OnEnable()
     {
+        UpdateMission(GameSession.Instance.currentMission);
         MissionSelectionManager.Instance.OnMissionSelect += UpdateMission;
     }
     private void OnDisable()

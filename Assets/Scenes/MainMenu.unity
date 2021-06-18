@@ -403,6 +403,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deb80af5af1968345894213d3dffe1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMission:
+    accomplished: 0
+    position: {x: 0, y: 0}
+    missionName: 
+  _allMissions:
+  - DebugMission
+  - DebugMission2
   sessionData:
     _isDebugMode: 0
     _vesselName: 
@@ -412,7 +419,9 @@ MonoBehaviour:
     _vesselArmor: 0
     _money: 0
     _movementSpeed: 2
-    _position: {x: 0, y: 0, z: 0}
+    _missionProgression:
+      _playerPos: {x: 0, y: 0}
+      _missions: []
 --- !u!4 &697004997
 Transform:
   m_ObjectHideFlags: 0

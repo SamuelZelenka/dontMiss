@@ -33,7 +33,10 @@ public class EnemySpawner : MonoBehaviour
         _aliveEnemies.Remove(enemy);
         if (_missionObjective.IsCompleted())
         {
+            //Set Mission to accomplished
+            GameSession.Instance.sessionData.MissionProgression.GetMissionAt(GameSession.Instance.sessionData.MissionProgression.GetPlayerPos()).accomplished = true;
             _ui.EnableWinOverlay();
+            GameSession.Instance.SaveData();
         }
     }
 

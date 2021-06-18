@@ -24,7 +24,8 @@ public class MissionSelectionCell : MonoBehaviour
     private void OnMouseDown()
     {
         GameSession.Instance.sessionData.MissionProgression.SetPlayerPos(_data.position);
-        GameSession.Instance.currentMission = "";
+        GameSession.Instance.currentMission = _data;
+        MissionSelectionManager.Instance.player.onMission = false;
         MissionSelectionManager.Instance.SelectMission(_data);
     }
     private void OnMouseExit()

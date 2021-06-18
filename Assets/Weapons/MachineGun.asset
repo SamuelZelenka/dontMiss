@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c99aa2a35ec4624aa69fe9aaaed5001, type: 3}
   m_Name: MachineGun
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5
   lifetime: 3
-  fireRate: 0.5
-  speed: 12
+  fireRate: 0.2
+  speed: 20
   projectilePrefab: {fileID: -215063905899793983, guid: 4dd012b4fdd5e2544a46d47f6aebeb66, type: 3}

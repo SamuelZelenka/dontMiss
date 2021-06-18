@@ -18,7 +18,6 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     [SerializeField] private UIViewer _ui;
 
-
     private SessionDataContainer Data => GameSession.Instance.sessionData;
     private void Awake()
     {
@@ -48,7 +47,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
         if (Input.GetKeyDown(KeyCode.H))
         {
-            GameSession.Instance.SaveData(Data.VesselName);
+            GameSession.Instance.SaveData();
         }
         if (Input.GetKeyDown(KeyCode.P))
         {

@@ -10,16 +10,18 @@ public class GameSession : MonoBehaviour
     public delegate void GameSessionHandler();
     public GameSessionHandler OnDataLoad;
     public GameDataHandler OnStatsChange;
-    public string currentMission;
+
+    public MissionData currentMission;
+    [SerializeField] private string[] _allMissions;
 
     private static GameSession _instance;
     public static GameSession Instance { get { return _instance; } }
 
     public SessionDataContainer sessionData;
 
-    public void SaveData(string saveName)
+    public void SaveData()
     {
-        SaveSystem.SaveSessionData(sessionData, saveName);
+        SaveSystem.SaveSessionData(sessionData);
     }
     public void LoadData(string saveName)
     {
@@ -32,12 +34,12 @@ public class GameSession : MonoBehaviour
         if (File.Exists(path))
         {
             File.Delete(path);
-            GameSession.Instance.sessionData = null;
+            Instance.sessionData = null;
             return true;
         }
         return false;
     }
-
+    public static string GetRandomMission() => Instance._allMissions[Random.Range(0, Instance._allMissions.Length)];
     private void Awake()
     {
         LoadData(sessionData.VesselName);

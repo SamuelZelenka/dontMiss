@@ -8,14 +8,14 @@ public static class SaveSystem
     public static readonly string MISSION_SAVE_DIRECTORY = Application.dataPath + "/MissionData/";
 
     #region Session Data
-    public static void SaveSessionData(SessionDataContainer data, string saveName)
+    public static void SaveSessionData(SessionDataContainer data)
     {
         if (!Directory.Exists(SESSION_SAVE_DIRECTORY))
         {
             Directory.CreateDirectory(SESSION_SAVE_DIRECTORY);
         }
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(SESSION_SAVE_DIRECTORY + saveName + ".rekt", json);
+        File.WriteAllText(SESSION_SAVE_DIRECTORY + data.VesselName + ".rekt", json);
         Debug.Log("Saved Game Session");
     }
 
