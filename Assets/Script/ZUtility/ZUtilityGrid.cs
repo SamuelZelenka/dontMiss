@@ -200,7 +200,7 @@ namespace ZUtility.Unity
                 }
                 for (int i = 0; i < neighbours.Length; i++)
                 {
-                    if (closedCells.Contains(neighbours[i])) //Conditions for searching a cell
+                    if (closedCells.Contains(neighbours[i]) && !neighbours[i].visited) //Conditions for searching a cell
                     {
                         continue;
                     }

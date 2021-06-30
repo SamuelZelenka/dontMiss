@@ -6,7 +6,7 @@ using ZUtility.Unity;
 public class MissionSelectionCell : MonoBehaviour
 {
     MissionData _data;
-    Animator animator;
+    Animator _animator;
     public void Init(MissionData data, ref ZGrid grid)
     {
         _data = data;
@@ -15,21 +15,26 @@ public class MissionSelectionCell : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
     private void OnMouseEnter()
     {
-        animator.SetBool("OnHover", true);
+        _animator.SetBool("OnHover", true);
     }
     private void OnMouseDown()
     {
-        GameSession.Instance.sessionData.MissionProgression.SetPlayerPos(_data.position);
-        GameSession.Instance.currentMission = _data;
-        MissionSelectionManager.Instance.player.onMission = false;
-        MissionSelectionManager.Instance.SelectMission(_data);
+        if (MissionSelectionManager.Instance.player.onMission)
+        {
+            GameSession.Instance.currentMission = _data;
+            MissionSelectionManager.Instance.SelectMission(_data);
+            if (MissionSelectionManager.Instance.player.PlayerPos != _data.position)
+            {
+                MissionSelectionManager.Instance.player.SetPathTo(_data.position);
+            }
+        }
     }
     private void OnMouseExit()
     {
-        animator.SetBool("OnHover", false);
+        _animator.SetBool("OnHover", false);
     }
 }

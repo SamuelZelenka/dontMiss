@@ -46,8 +46,10 @@ public class MissionGrid : MonoBehaviour
                 cell.transform.SetParent(_cellParent);
                 cell.Init(data, ref _grid);
                 _grid.gridArray[data.position.x, data.position.y].value = data.missionName;
+                _grid.gridArray[data.position.x, data.position.y].visited = true;
             }
         }
     }
     public Vector3 GetWorldPos(Vector2Int pos) => _grid.GetWorldPosition(pos.x, pos.y);
+    public ZGridPathInfo GetPathInfoBetween(Vector2Int fromPos, Vector2Int toPos) => _grid.FindPath(fromPos, toPos);
 }

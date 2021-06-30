@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class MainMenuScript : MonoBehaviour
 {
-
     private GameSession currentSession;
 
-    [SerializeField] private InputField _nameInput;
-    [SerializeField] private Transform _vesselGrid;
     [SerializeField] private VesselLoader _vesselLoaderPrefab;
+
+    [SerializeField] private FlexibleLayoutGroup _layout;
+    [SerializeField] private InputField _nameInput;
 
     [Header("On Selected Vessel")]
     [SerializeField] private GameObject _startButton;
@@ -19,10 +19,13 @@ public class MainMenuScript : MonoBehaviour
 
 
     [Header("Vessel Info")]
+    [SerializeField] private Transform _vesselInfoTransform;
     [SerializeField] private Text _vesselName;
     [SerializeField] private Text _vesselHP;
     [SerializeField] private Text _vesselArmor;
     [SerializeField] private Text _money;
+
+
 
     private void Awake()
     {
@@ -85,17 +88,11 @@ public class MainMenuScript : MonoBehaviour
             _vesselHP.text = "Health: " + GameSession.Instance.sessionData.VesselHP.ToString();
             _vesselArmor.text = "Armor: " + GameSession.Instance.sessionData.VesselArmor.ToString();
             _money.text = "$" + GameSession.Instance.sessionData.Money.ToString();
-            _deleteButton.SetActive(true);
-            _startButton.SetActive(true);
+            _vesselInfoTransform.gameObject.SetActive(true);
         }
         else
         {
-            _vesselName.text = "";
-            _vesselHP.text = "";
-            _vesselArmor.text = "";
-            _money.text = "";
-            _deleteButton.SetActive(false);
-            _startButton.SetActive(false);
+            _vesselInfoTransform.gameObject.SetActive(false);
         }
     }
     public void DisplaySavedVessels()
@@ -103,14 +100,13 @@ public class MainMenuScript : MonoBehaviour
         DirectoryInfo directoryInfo = new DirectoryInfo(SaveSystem.SESSION_SAVE_DIRECTORY);
         FileInfo[] saveFiles = directoryInfo.GetFiles("*.rekt");
 
-        Utility.DestroyChildObjects(_vesselGrid);
+        Utility.DestroyChildObjects(_layout.transform);
         foreach (FileInfo fileInfo in saveFiles)
         {
             if (fileInfo != null)
             {
                 string saveString = File.ReadAllText(fileInfo.FullName);
-                VesselLoader vessel = Instantiate(_vesselLoaderPrefab);
-                vessel.transform.SetParent(_vesselGrid);
+                VesselLoader vessel = Instantiate(_vesselLoaderPrefab, _layout.transform);
 
                 SessionDataContainer data = JsonUtility.FromJson<SessionDataContainer>(saveString);
 
