@@ -36,6 +36,7 @@ public class EnemySpawner : MonoBehaviour
             //Set Mission to accomplished
             GameSession.Instance.sessionData.MissionProgression.GetMissionAt(GameSession.Instance.sessionData.MissionProgression.GetPlayerPos()).accomplished = true;
             _ui.EnableWinOverlay();
+            GameSession.Instance.sessionData.MissionProgression.GenerateNewMissions();
             GameSession.Instance.SaveData();
         }
     }

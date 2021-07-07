@@ -5,11 +5,14 @@ using ZUtility.Unity;
 
 public abstract class PlayerMovementState
 {
+    public abstract void StateUpdate();
 }
 
 public class OnLocationState : PlayerMovementState
 {
-
+    public override void StateUpdate()
+    {
+    }
 }
 public class TravelingState : PlayerMovementState
 {
@@ -27,15 +30,18 @@ public class TravelingState : PlayerMovementState
         _pathIndex = 0;
     }
 
-    public void StateUpdate()
+    public override void StateUpdate()
     {
-
         Vector3 playerWorldPos = _grid.GetWorldPos(_player.PlayerPos);
-       
 
-        if (Vector3.Distance(playerWorldPos, _grid.GetWorldPos(_pathInfo.path[_pathIndex])) < 0.1f)
+        if (Vector3.Distance(_player.transform.position, _grid.GetWorldPos(_pathInfo.path[_pathIndex])) < 0.1f)
         {
-
+            _pathIndex++;
+            if (_pathIndex == _pathInfo.path.Length - 1)
+            {
+                _player.moveState = new OnLocationState();
+            }
         }
+        _player.transform.position = Vector3.MoveTowards(_player.transform.position, _grid.GetWorldPos(_pathInfo.path[_pathIndex]), _player.travelSpeed);
     }
 }

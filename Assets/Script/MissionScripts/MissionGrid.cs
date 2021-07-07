@@ -32,6 +32,11 @@ public class MissionGrid : MonoBehaviour
         camera.SetPosition(defaultMissionPos);
 
         _cellParent = new GameObject("MissionSelectionCells").transform;
+
+        if (GameSession.Instance.currentMission.missionName == "")
+        {
+            GameSession.Instance.currentMission = GameSession.Instance.sessionData.MissionProgression.GetMission(0);
+        }
     }
 
     public void PlaceMissionCells()

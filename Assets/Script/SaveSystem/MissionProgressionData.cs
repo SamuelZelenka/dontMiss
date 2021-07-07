@@ -8,6 +8,8 @@ public class MissionProgressionData
     [SerializeField] private Vector2Int _playerPos;
     [SerializeField] private List<MissionData> _missions;
     public int Count => _missions.Count;
+
+
     public void GenerateNewMissions()
     {
         AddMission(_playerPos + new Vector2Int(0, 1), GameSession.GetRandomMission());

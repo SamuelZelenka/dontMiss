@@ -23,7 +23,7 @@ public class MissionSelectionCell : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        if (MissionSelectionManager.Instance.player.onMission)
+        if (MissionSelectionManager.Instance.player.moveState.Equals(typeof(OnLocationState)))
         {
             GameSession.Instance.currentMission = _data;
             MissionSelectionManager.Instance.SelectMission(_data);

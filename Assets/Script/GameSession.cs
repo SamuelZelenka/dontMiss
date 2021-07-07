@@ -42,6 +42,7 @@ public class GameSession : MonoBehaviour
     public static string GetRandomMission() => Instance._allMissions[Random.Range(0, Instance._allMissions.Length)];
     private void Awake()
     {
+        
         LoadData(sessionData.VesselName);
         if (_instance != null && _instance != this)
         {
