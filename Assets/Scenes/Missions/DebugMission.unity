@@ -330,8 +330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77526245733ed574993e321faeff5038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRate: 5
-  _maxEnemyCount: 5
+  _spawnRate: 2
+  _maxEnemyCount: 15
   _enemyPrefab: {fileID: 6482324838293429324, guid: e7c41600c671e504bba806a9db38763b, type: 3}
   _path: {fileID: 714003352}
   _ui: {fileID: 0}
@@ -361,8 +361,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77526245733ed574993e321faeff5038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnRate: 1
-  _maxEnemyCount: 6
+  _spawnRate: 0.5
+  _maxEnemyCount: 50
   _enemyPrefab: {fileID: 394586005845315395, guid: 70fba9a62275237458cb87b1c713be84, type: 3}
   _path: {fileID: 1115175903}
   _ui: {fileID: 0}

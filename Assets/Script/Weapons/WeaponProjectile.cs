@@ -11,7 +11,7 @@ public abstract class WeaponProjectile : MonoBehaviour
 
     public bool IsPlayerProjectile => isPlayerProjectile;
 
-    public abstract void Init(float lifetime, float speed, int damage, bool isPlayerProjectile);
+    public abstract void Init(float lifetime, float speed, Quaternion rotation, int damage, bool isPlayerProjectile);
 
     private void OnBecameInvisible()
     {

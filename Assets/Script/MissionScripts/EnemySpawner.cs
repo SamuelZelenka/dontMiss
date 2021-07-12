@@ -44,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnEnemy()
     {
         yield return new WaitForSeconds(_spawnRate);
-        Enemy enemy = Instantiate(_enemyPrefab);
+        Enemy enemy = Instantiate(_enemyPrefab, new Vector3(10000,10000,0), _enemyPrefab.transform.rotation);
         enemy.pathCreator = _path;
         _totalEnemyCount++;
         _aliveEnemies.Add(enemy);

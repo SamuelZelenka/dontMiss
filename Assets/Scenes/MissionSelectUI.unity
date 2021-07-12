@@ -539,6 +539,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _missionName: {fileID: 1797585095}
   _missionDescription: {fileID: 245843841}
+  _missionWindow: {fileID: 1792016014}
 --- !u!1 &1792016014
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,7 +557,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1792016015
 RectTransform:
   m_ObjectHideFlags: 0

@@ -5,19 +5,31 @@ using ZUtility.Unity;
 
 public abstract class PlayerMovementState
 {
-    public abstract void StateUpdate();
+    public virtual void StateUpdate() { }
 }
 
 public class OnLocationState : PlayerMovementState
 {
-    public override void StateUpdate()
+
+    MissionData mission;
+
+    public OnLocationState(MissionData mission)
     {
+        this.mission = mission;
+        GameSession.Instance.sessionData.MissionProgression.SetPlayerPos(mission.position);
+        if (mission.accomplished)
+        {
+            GameSession.Instance.sessionData.MissionProgression.GenerateNewMissions();
+        }
+        GameSession.Instance.SaveData();
     }
+
 }
 public class TravelingState : PlayerMovementState
 {
     int _pathIndex;
-    ZGridPathInfo _pathInfo;
+    Vector2Int _toPos;
+    Vector2Int[] _path;
     MissionSelectPlayer _player;
     MissionGrid _grid;
 
@@ -26,22 +38,32 @@ public class TravelingState : PlayerMovementState
     {
         _grid = grid;
         _player = player;
-        _pathInfo = _grid.GetPathInfoBetween(player.PlayerPos, toPos);
+        _path = _grid.GetPathInfoBetween(player.PlayerPos, toPos).path;
         _pathIndex = 0;
+        _toPos = toPos;
     }
 
     public override void StateUpdate()
     {
-        Vector3 playerWorldPos = _grid.GetWorldPos(_player.PlayerPos);
+        Vector3 targetPos = _grid.GetWorldPos(_path[_pathIndex]);
 
-        if (Vector3.Distance(_player.transform.position, _grid.GetWorldPos(_pathInfo.path[_pathIndex])) < 0.1f)
+        if (_pathIndex == _path.Length - 1)
         {
-            _pathIndex++;
-            if (_pathIndex == _pathInfo.path.Length - 1)
-            {
-                _player.moveState = new OnLocationState();
-            }
+            targetPos = _grid.GetWorldPos(_toPos); ;
         }
-        _player.transform.position = Vector3.MoveTowards(_player.transform.position, _grid.GetWorldPos(_pathInfo.path[_pathIndex]), _player.travelSpeed);
+
+        if (Vector3.Distance(_player.transform.position, targetPos) < 0.1f)
+        {
+           
+            if (_pathIndex == _path.Length - 1)
+            {
+                _player.moveState = new OnLocationState(GameSession.Instance.sessionData.MissionProgression.GetMissionAt(_toPos));
+                return;
+            }
+            _pathIndex++;
+        }
+        _player.transform.position = Vector3.MoveTowards(_player.transform.position, targetPos, _player.travelSpeed * Time.deltaTime);
     }
 }
+
+

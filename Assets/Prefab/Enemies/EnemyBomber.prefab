@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pathCreator: {fileID: 0}
   end: 0
-  HP: 60
+  HP: 50
   speed: 3
   _dropRate: 5
   _bombPrefab: {fileID: 6508638259404392674, guid: f5d6a61db08fa5641bb3f75311545b9a, type: 3}

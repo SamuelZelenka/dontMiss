@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] private WeaponTemplate _weapon;
-    [SerializeField] private Vector3[] _muzzlePoints;
+    [SerializeField] private Transform[] _muzzlePoints;
 
     [SerializeField] private UIViewer _ui;
 
@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour, IDamagable
     private void Shoot()
     {
         _muzzleIndex = ((_muzzleIndex + 1) % _muzzlePoints.Length);
-        _weapon.Shoot(transform.position + _muzzlePoints[_muzzleIndex], true).player = this;
+        _weapon.Shoot(_muzzlePoints[_muzzleIndex], true).player = this;
     }
     private void ClampPosition()
     {

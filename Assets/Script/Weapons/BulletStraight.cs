@@ -8,7 +8,7 @@ public class BulletStraight : WeaponProjectile
     private float _initTime;
     private float _lifeTime;
 
-    public override void Init(float lifeTime, float speed, int damage, bool isPlayer)
+    public override void Init(float lifeTime, float speed, Quaternion rotation, int damage, bool isPlayer)
     {
         _speed = speed;
         _lifeTime = lifeTime;
@@ -16,6 +16,7 @@ public class BulletStraight : WeaponProjectile
         Hit = false;
         Damage = damage;
         isPlayerProjectile = isPlayer;
+        transform.rotation = rotation;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

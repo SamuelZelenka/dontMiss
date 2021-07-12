@@ -15,10 +15,10 @@ public class AlternateMuzzle : WeaponTemplate
     public override float GetFireRate() => fireRate;
     public override int GetDamage() => damage;
 
-    public override WeaponProjectile Shoot(Vector3 muzzle , bool isPlayer)
+    public override WeaponProjectile Shoot(Transform muzzle, bool isPlayer)
     {
-        WeaponProjectile projectile = Instantiate(projectilePrefab, muzzle, Quaternion.Euler(Vector3.zero));
-        projectile.Init(lifetime, speed, damage, isPlayer);
+        WeaponProjectile projectile = Instantiate(projectilePrefab, muzzle.position, muzzle.rotation);
+        projectile.Init(lifetime, speed, muzzle.rotation, damage, isPlayer);
         return projectile;
     }
 }

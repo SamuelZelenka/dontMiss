@@ -59,7 +59,7 @@ public class ScatterBomb : MonoBehaviour
             float newAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             projectile.transform.rotation = Quaternion.AngleAxis(newAngle, Vector3.forward);
             
-            projectile.Init(scatterLifetime, scatterSpeed, scatterDamage, false);
+            projectile.Init(scatterLifetime, scatterSpeed, projectile.transform.rotation, scatterDamage, false);
         }
         Instantiate(explosionPrefab, transform.position, Quaternion.Euler(0, 0, 0));
         Destroy(gameObject);

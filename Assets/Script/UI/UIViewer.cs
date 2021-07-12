@@ -32,5 +32,5 @@ public class UIViewer : MonoBehaviour
     {
         _healthBar.fillAmount = (float)GameSession.Instance.sessionData.VesselHP / (float)GameSession.Instance.sessionData.MaxVesselHP;
     }
-    public void SwitchToMainMenu() => SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    public void SwitchToMainMenu() => SceneManager.LoadScene("MissionSelect", LoadSceneMode.Single);
 }

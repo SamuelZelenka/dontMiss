@@ -200,7 +200,7 @@ namespace ZUtility.Unity
                 }
                 for (int i = 0; i < neighbours.Length; i++)
                 {
-                    if (closedCells.Contains(neighbours[i]) && !neighbours[i].visited) //Conditions for searching a cell
+                    if (closedCells.Contains(neighbours[i]) || !neighbours[i].visited) //Conditions for searching a cell
                     {
                         continue;
                     }
@@ -217,6 +217,7 @@ namespace ZUtility.Unity
 
             List<Vector2Int> newPath = new List<Vector2Int>();
             GetPath(GetCell(endPos));
+            newPath.Reverse();
             return new ZGridPathInfo(startPos, endPos, newPath.ToArray());
 
             void GetPath(GridCell cell)

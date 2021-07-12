@@ -16,9 +16,9 @@ public class MissionSelectPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveState = new OnLocationState();
+        moveState = new OnLocationState(GameSession.Instance.sessionData.MissionProgression.GetMissionAt(PlayerPos));
         MissionSelectionManager.Instance.player = this;
-        transform.position = _grid.GetWorldPos(GameSession.Instance.sessionData.MissionProgression.GetPlayerPos());
+        transform.position = _grid.GetWorldPos(PlayerPos);
     }
 
     // Update is called once per frame
