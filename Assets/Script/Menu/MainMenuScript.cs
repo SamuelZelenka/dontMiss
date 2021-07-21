@@ -71,6 +71,10 @@ public class MainMenuScript : MonoBehaviour
             UpdateVesselInfo();
         }
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     public void DeleteVesselButton()
     {
         if (GameSession.DeleteCurrentVessel())

@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnRate: 2
-  _maxEnemyCount: 15
+  _maxEnemyCount: 2
   _enemyPrefab: {fileID: 6482324838293429324, guid: e7c41600c671e504bba806a9db38763b, type: 3}
   _path: {fileID: 714003352}
   _ui: {fileID: 0}
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnRate: 0.5
-  _maxEnemyCount: 50
+  _maxEnemyCount: 4
   _enemyPrefab: {fileID: 394586005845315395, guid: 70fba9a62275237458cb87b1c713be84, type: 3}
   _path: {fileID: 1115175903}
   _ui: {fileID: 0}

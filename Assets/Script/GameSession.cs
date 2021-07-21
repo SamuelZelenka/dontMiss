@@ -12,7 +12,6 @@ public class GameSession : MonoBehaviour
     public GameDataHandler OnStatsChange;
 
     public MissionData currentMission;
-    [SerializeField] private string[] _allMissions;
 
     private static GameSession _instance;
     public static GameSession Instance { get { return _instance; } }
@@ -26,6 +25,7 @@ public class GameSession : MonoBehaviour
     public void LoadData(string saveName)
     {
         sessionData = SaveSystem.LoadSessionData(saveName);
+
         OnDataLoad?.Invoke();
     }
     public static bool DeleteCurrentVessel()
@@ -39,7 +39,7 @@ public class GameSession : MonoBehaviour
         }
         return false;
     }
-    public static string GetRandomMission() => Instance._allMissions[Random.Range(0, Instance._allMissions.Length)];
+    public static string GetRandomMission() => ReferenceLibrary.Instance.allMissions[Random.Range(0, ReferenceLibrary.Instance.allMissions.Length)];
     private void Awake()
     {
         

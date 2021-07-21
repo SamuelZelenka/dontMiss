@@ -75,28 +75,6 @@ public class ZUtilityCamera : MonoBehaviour
             mousePos = activeCamera.ScreenToWorldPoint(Input.mousePosition);
             cameraTransform.cameraPosition = transform.localPosition + mouseDownPos - mousePos;
         }
-
-        void MoveDirection(Direction direction, bool isButtonPressed)
-        {
-            float zoomScale = activeCamera.orthographicSize * zoomSpeedScale / zoomMax;
-            switch (direction)
-            {
-                case Direction.Up:
-                    cameraTransform.cameraPosition.y += cameraSpeed * zoomScale * Time.deltaTime;
-                    break;
-                case Direction.Left:
-                    cameraTransform.cameraPosition.x -= cameraSpeed * zoomScale * Time.deltaTime;
-                    break;
-                case Direction.Down:
-                    cameraTransform.cameraPosition.y -= cameraSpeed * zoomScale * Time.deltaTime;
-                    break;
-                case Direction.Right:
-                    cameraTransform.cameraPosition.x += cameraSpeed * zoomScale * Time.deltaTime;
-                    break;
-                default:
-                    break;
-            }
-        }
     }
     void UpdatePosition()
     {

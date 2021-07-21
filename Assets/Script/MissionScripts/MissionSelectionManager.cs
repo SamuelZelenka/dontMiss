@@ -35,4 +35,11 @@ public class MissionSelectionManager : MonoBehaviour
             _instance = this;
         }
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
+    }
 }

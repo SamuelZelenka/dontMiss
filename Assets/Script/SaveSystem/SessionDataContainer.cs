@@ -23,18 +23,30 @@ public class SessionDataContainer
     {
         get
         {
-            return _maxVesselHP;
+            return _maxBaseHP + GetAdditionalHP();
         }
         set
         {
             if (value < 1)
             {
-                _maxVesselHP = 1;
+                _maxBaseHP = 1;
             }
             else
             {
-                _maxVesselHP = value;
+                _maxBaseHP = value;
             }
+            GameSession.Instance?.OnStatsChange?.Invoke();
+        }
+    }
+    public int MaxAdditionalHP
+    {
+        get
+        {
+            return _maxAdditionalHP;
+        }
+        set
+        {
+            _maxAdditionalHP = value;
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
@@ -43,18 +55,30 @@ public class SessionDataContainer
 
         get
         {
-            return _maxVesselArmor;
+            return _maxBaseArmor + _maxAdditionalArmor;
         }
         set
         {
             if (value < 1)
             {
-                _maxVesselArmor = 1;
+                _maxBaseArmor = 1;
             }
             else
             {
-                _maxVesselArmor = value;
+                _maxBaseArmor = value;
             }
+            GameSession.Instance?.OnStatsChange?.Invoke();
+        }
+    }
+    public int MaxAdditionalArmor
+    {
+        get
+        {
+            return _maxAdditionalArmor;
+        }
+        set
+        {
+            _maxAdditionalArmor = value;
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
@@ -62,15 +86,15 @@ public class SessionDataContainer
     {
         get
         {
-            return _vesselHP;
+            return _currentHP;
         }
         set
         {
-            if (_vesselHP > _maxVesselHP)
+            if (_currentHP > _maxBaseHP)
             {
-                _vesselHP = _maxVesselHP;
+                _currentHP = _maxBaseHP;
             }
-            _vesselHP = value;
+            _currentHP = value;
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
@@ -78,11 +102,11 @@ public class SessionDataContainer
     {
         get
         {
-            return _vesselArmor;
+            return _currentArmor;
         }
         set
         {
-            _vesselArmor = value;
+            _currentArmor = value;
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
@@ -110,6 +134,26 @@ public class SessionDataContainer
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
+    public void AddUpgrade(IUpgradable upgrade)
+    {
+        _upgrades.Add(upgrade.ToString());
+        ReferenceLibrary.Instance.GetUpgrade(_upgrades[_upgrades.Count - 1]).ApplyUpgrade(this);
+        
+    }
+    public List<string> GetUpgrades() => _upgrades;
+    private int GetAdditionalHP()
+    {
+        int additionalHP = 0;
+        foreach (string upgrade in _upgrades)
+        {
+            if (ReferenceLibrary.Instance.GetUpgrade(upgrade).GetType() == typeof(HealthUpgrade))
+            {
+                HealthUpgrade healthUpgrade = ReferenceLibrary.Instance.GetUpgrade(upgrade) as HealthUpgrade;
+                additionalHP += healthUpgrade.amount;
+            }
+        }
+        return additionalHP;
+    }
     public MissionProgressionData MissionProgression
     {
         get
@@ -124,11 +168,16 @@ public class SessionDataContainer
 
     [SerializeField] private bool _isDebugMode = false;
     [SerializeField] private string _vesselName;
-    [SerializeField] private int _maxVesselHP;
-    [SerializeField] private int _maxVesselArmor;
-    [SerializeField] private int _vesselHP;
-    [SerializeField] private int _vesselArmor;
+    [SerializeField] private int _maxBaseHP;
+    [SerializeField] private int _maxBaseArmor;
+   
+    [SerializeField] private int _currentHP;
+    [SerializeField] private int _currentArmor;
     [SerializeField] private int _money;
     [SerializeField] private float _movementSpeed;
+    [SerializeField] private List<string> _upgrades;
     [SerializeField] private MissionProgressionData _missionProgression;
+
+    private int _maxAdditionalHP;
+    private int _maxAdditionalArmor;
 }
