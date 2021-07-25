@@ -8,6 +8,8 @@ public class BulletStraight : WeaponProjectile
     private float _initTime;
     private float _lifeTime;
 
+    [SerializeField] private ContactFilter2D _shooterFilter;
+
     public override void Init(float lifeTime, float speed, Quaternion rotation, int damage, bool isPlayer)
     {
         _speed = speed;
@@ -17,11 +19,23 @@ public class BulletStraight : WeaponProjectile
         Damage = damage;
         isPlayerProjectile = isPlayer;
         transform.rotation = rotation;
+        if (isPlayer)
+        {
+            gameObject.layer = 7;
+        }
+        else
+        {
+            gameObject.layer = 6;
+
+        }
+        _shooterFilter.SetLayerMask(Physics2D.GetLayerCollisionMask(gameObject.layer));
+        _shooterFilter.useLayerMask = true;
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        WeaponProjectile projectile = collision.GetComponent<WeaponProjectile>();
+        WeaponProjectile projectile = collision.gameObject.GetComponent<WeaponProjectile>();
         if (projectile != null && projectile.IsPlayerProjectile != IsPlayerProjectile)
         {
             Destroy(gameObject);

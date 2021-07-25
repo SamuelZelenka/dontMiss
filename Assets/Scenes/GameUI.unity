@@ -523,7 +523,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: eaaad126189cd5443b59c98178358563, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 0
@@ -535,7 +535,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: Continue
 --- !u!222 &212332573
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1493,7 +1493,7 @@ GameObject:
   - component: {fileID: 1183347313}
   - component: {fileID: 1183347312}
   m_Layer: 0
-  m_Name: Main Menu Button
+  m_Name: Continue Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1565,7 +1565,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 937034342}
         m_TargetAssemblyTypeName: UIViewer, Assembly-CSharp
-        m_MethodName: SwitchToMainMenu
+        m_MethodName: SwitchToMissionSelect
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

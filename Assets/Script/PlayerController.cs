@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamagable
 {
+    const float MAXDAMAGERATE = 0.4f;
+
     private Vector3 _minMovementPos;
     private Vector3 _maxMovementPos;
     private Vector3 _targetMovementDirection;
@@ -11,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDamagable
 
     private int _muzzleIndex = 0;
     private float _lastShotTime = 0;
+    private float _lastDamageTakenTime = 0;
     private SpriteRenderer _spriteRenderer;
 
     [SerializeField] private WeaponTemplate _weapon;
@@ -52,6 +55,17 @@ public class PlayerController : MonoBehaviour, IDamagable
         if (Input.GetKeyDown(KeyCode.P))
         {
             GameSession.Instance.LoadData(Data.VesselName);
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            if (_lastDamageTakenTime + MAXDAMAGERATE < Time.time)
+            {
+                TakeDamage(Mathf.RoundToInt(GameSession.Instance.sessionData.MaxVesselHP * 0.05f));
+                _lastDamageTakenTime = Time.time;
+            }
         }
     }
     public void TakeDamage(int damage)

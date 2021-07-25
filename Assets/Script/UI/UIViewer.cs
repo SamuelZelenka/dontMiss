@@ -53,5 +53,7 @@ public class UIViewer : MonoBehaviour
         _healthBar.fillAmount = (float)GameSession.Instance.sessionData.VesselHP / (float)GameSession.Instance.sessionData.MaxVesselHP;
         _healthText.text = $"{GameSession.Instance.sessionData.VesselHP} / {GameSession.Instance.sessionData.MaxVesselHP}";
     }
-    public void SwitchToMainMenu() => SceneManager.LoadScene("MissionSelect", LoadSceneMode.Single);
+    public void SwitchToMainMenu() => SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+    public void SwitchToMissionSelect() => SceneManager.LoadScene("MissionSelect", LoadSceneMode.Single);
+
 }
