@@ -6,10 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(SpriteRenderer))]
 public abstract class Enemy : MonoBehaviour, IDamagable
 {
-
     public delegate void EnemyHandler(Enemy enemy);
     public EnemyHandler OnDeath;
-
 
     private SpriteRenderer spriteRenderer;
 
@@ -18,6 +16,8 @@ public abstract class Enemy : MonoBehaviour, IDamagable
     public int HP;
     public float speed;
     protected float DstTravelled;
+
+    private float _itemDropChance = 0.2f;
 
     public virtual void Awake()
     {
@@ -36,6 +36,10 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         {
             OnDeath?.Invoke(this);
             Destroy(gameObject);
+            if (_itemDropChance > Random.value)
+            {
+                Instantiate<>
+            }
         }
         spriteRenderer.color = Color.red;
         StartCoroutine(TakeDamageEffect.DamageEffect(spriteRenderer));
