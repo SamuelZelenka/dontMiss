@@ -8,9 +8,11 @@ public class ReferenceLibrary : MonoBehaviour
     [SerializeField] private Sprite _healthUpgradeSprite;
     [SerializeField] private Sprite _speedUpgradeSprite;
 
-    private List<string> _availableUpgrades = new List<string>();
+ 
     private Dictionary<string, IUpgradable> _upgradeDictionary = new Dictionary<string, IUpgradable>();
+
     public string[] allMissions;
+    public List<string> availableUpgrades = new List<string>();
 
     private static ReferenceLibrary _instance;
     public static ReferenceLibrary Instance => _instance;
