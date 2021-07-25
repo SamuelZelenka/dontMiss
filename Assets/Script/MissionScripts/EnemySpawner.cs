@@ -8,8 +8,10 @@ public class EnemySpawner : MonoBehaviour
     private List<Enemy> _aliveEnemies = new List<Enemy>();
     private int _totalEnemyCount = 0;
     private MissionObjective _missionObjective;
+    private bool isActive = false;
 
     [SerializeField] private float _spawnRate = 2;
+    [SerializeField] private float _spawnDelay = 0;
     [SerializeField] private int _maxEnemyCount = 1;
     [SerializeField] private Enemy _enemyPrefab;
     [SerializeField] private PathCreator _path;
@@ -24,7 +26,14 @@ public class EnemySpawner : MonoBehaviour
     {
         _ui = FindObjectOfType<UIViewer>();
         _missionObjective = GetComponent<MissionObjective>();
-        StartCoroutine("SpawnEnemy");
+    }
+    private void Update()
+    {
+        if (!isActive && _spawnDelay < Time.timeSinceLevelLoad)
+        {
+            isActive = true;
+            StartCoroutine("SpawnEnemy");
+        }
     }
 
     public void OnEnemyDeath(Enemy enemy)
