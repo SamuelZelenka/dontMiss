@@ -9,8 +9,9 @@ public class ReferenceLibrary : MonoBehaviour
     [SerializeField] private Sprite _speedUpgradeSprite;
 
     private List<string> _availableUpgrades = new List<string>();
-    private Dictionary<string, IUpgradable> _upgradeDictionary = new Dictionary<string, IUpgradable>();
+    private Dictionary<string, Upgradable> _upgradeDictionary = new Dictionary<string, Upgradable>();
     public string[] allMissions;
+    public List<UpgradePickUp> upgradePrefabs;
 
     private static ReferenceLibrary _instance;
     public static ReferenceLibrary Instance => _instance;
@@ -27,9 +28,22 @@ public class ReferenceLibrary : MonoBehaviour
         }
         DontDestroyOnLoad(this.gameObject);
     }
-    public IUpgradable GetUpgrade(string upgradeName) => _upgradeDictionary[upgradeName];
+    public Upgradable GetUpgrade(string upgradeName) => _upgradeDictionary[upgradeName];
+    public UpgradePickUp GetUpgradePrefab(string upgradeName)
+    {
+        foreach (UpgradePickUp upgrade in upgradePrefabs)
+        {
+            if (upgrade.upgradeName == upgradeName)
+            {
+                return upgrade;
+            }
+        }
+        Debug.LogError($"{upgradeName} does not exist in available upgrade prefabs.");
+        return null;
+    }
 
-    public void LoadUpgrade(IUpgradable upgrade)
+
+    public void LoadUpgrade(Upgradable upgrade)
     {
         _availableUpgrades.Add(upgrade.ToString());
         _upgradeDictionary.Add(upgrade.ToString(), upgrade);

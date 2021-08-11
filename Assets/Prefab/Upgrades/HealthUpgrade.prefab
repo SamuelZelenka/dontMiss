@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10601dc0a4a940042ad098ed7ec1e457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _upgradeName: HealthUpgrade
+  upgradeName: HealthUpgrade
   _upgradeSprite: {fileID: 1507409349110237955}
 --- !u!58 &6037049257651213520
 CircleCollider2D:

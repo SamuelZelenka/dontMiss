@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5745351752432476312}
   - component: {fileID: 964888013100026039}
   m_Layer: 0
-  m_Name: SpeedUgrade
+  m_Name: SpeedUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10601dc0a4a940042ad098ed7ec1e457, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _upgradeName: SpeedUpgrade
+  upgradeName: SpeedUpgrade
   _upgradeSprite: {fileID: 618992593201561419}
 --- !u!58 &5745351752432476312
 CircleCollider2D:

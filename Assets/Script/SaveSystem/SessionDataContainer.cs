@@ -134,7 +134,7 @@ public class SessionDataContainer
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
-    public void AddUpgrade(IUpgradable upgrade)
+    public void AddUpgrade(Upgradable upgrade)
     {
         _upgrades.Add(upgrade.ToString());
         ReferenceLibrary.Instance.GetUpgrade(_upgrades[_upgrades.Count - 1]).ApplyUpgrade(this);

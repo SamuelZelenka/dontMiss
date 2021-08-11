@@ -36,6 +36,7 @@ public abstract class Enemy : MonoBehaviour, IDamagable
         {
             OnDeath?.Invoke(this);
             Destroy(gameObject);
+            Instantiate(Upgrade.GetRandomUpgradePrefab(), transform.position, Quaternion.Euler(0,0,0));
         }
         spriteRenderer.color = Color.red;
         StartCoroutine(TakeDamageEffect.DamageEffect(spriteRenderer));
