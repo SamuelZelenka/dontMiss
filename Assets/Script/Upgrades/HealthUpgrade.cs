@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthUpgrade : IUpgradable
+public class HealthUpgrade : Upgradable
 {
     public int amount = 10;
     private Sprite _sprite;
@@ -11,16 +11,16 @@ public class HealthUpgrade : IUpgradable
     {
         _sprite = sprite;
     }
-    public Sprite GetSprite() => _sprite;
-    public string GetDescription() => $"Increase Max Health by {amount}";
+    public override Sprite GetSprite() => _sprite;
+    public override string GetDescription() => $"Increase Max Health by {amount}";
 
-    public void ApplyUpgrade(SessionDataContainer sessionData)
+    public override void ApplyUpgrade(SessionDataContainer sessionData)
     {
         sessionData.MaxAdditionalHP += amount;
         sessionData.VesselHP += amount;
 
     }
-    public void RevokeUpgrade(SessionDataContainer sessionData)
+    public override void RevokeUpgrade(SessionDataContainer sessionData)
     {
         sessionData.MaxAdditionalHP -= amount;
     }
