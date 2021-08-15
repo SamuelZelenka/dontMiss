@@ -9,7 +9,7 @@ public class EnemyDownShooter : Enemy
 
     [SerializeField] private float _fireRate;
     [SerializeField] private Transform[] _muzzles;
-    [SerializeField] private WeaponTemplate _weapon;
+
     [Header("Bullet Values")]
     [SerializeField] private float _bulletLifetime;
     [SerializeField] private float _bulletSpeed;
@@ -30,8 +30,5 @@ public class EnemyDownShooter : Enemy
     {
         _muzzleIndex++;
         _muzzleIndex = _muzzleIndex % _muzzles.Length;
-        WeaponProjectile projectile = _weapon.Shoot(_muzzles[_muzzleIndex], false);
-        projectile.Init(_bulletLifetime, _bulletSpeed,_muzzles[_muzzleIndex].rotation, _bulletDamage, false);
-        projectile.transform.rotation = Quaternion.Euler(0, 0, 180);
     }
 }

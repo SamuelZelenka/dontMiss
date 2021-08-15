@@ -7,11 +7,13 @@ public class ReferenceLibrary : MonoBehaviour
     //Change to dictionary with Odin inspector when license is here.
     [SerializeField] private Sprite _healthUpgradeSprite;
     [SerializeField] private Sprite _speedUpgradeSprite;
+  
 
     private List<string> _availableUpgrades = new List<string>();
     private Dictionary<string, Upgradable> _upgradeDictionary = new Dictionary<string, Upgradable>();
     public string[] allMissions;
     public List<UpgradePickUp> upgradePrefabs;
+    public List<Projectile> projectilePrefabs;
 
     private static ReferenceLibrary _instance;
     public static ReferenceLibrary Instance => _instance;
@@ -39,6 +41,18 @@ public class ReferenceLibrary : MonoBehaviour
             }
         }
         Debug.LogError($"{upgradeName} does not exist in available upgrade prefabs.");
+        return null;
+    }
+    public Projectile GetProjectilePrefab(string projectileName)
+    {
+        foreach (Projectile projectile in projectilePrefabs)
+        {
+            if (projectile.ToString() == projectileName)
+            {
+                return projectile;
+            }
+        }
+        Debug.LogError($"{projectileName} does not exist in available upgrade prefabs.");
         return null;
     }
 

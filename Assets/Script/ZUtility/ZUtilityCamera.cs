@@ -11,14 +11,12 @@ public class ZUtilityCamera : MonoBehaviour
 
     [Header("Camera")]
     [SerializeField] float cameraLerpSpeed = 5;
-    [Range(0, 100)] [SerializeField] float cameraSpeed = 0;
 
     [Header("Zoom")]
     [SerializeField] float zoomMin = 1;
     [SerializeField] float zoomMax = 10;
     [SerializeField] float zoomLerpSpeed = 10;
     [SerializeField] float zoomSpeed = 200;
-    [Range(1, 10)] [SerializeField] float zoomSpeedScale = 1;
 
     [Header("Input Axis")]
     [SerializeField] string zoomInput;

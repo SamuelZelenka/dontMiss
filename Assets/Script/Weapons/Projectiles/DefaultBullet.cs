@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletStraight : WeaponProjectile
+public class DefaultBullet : Projectile
 {
     private float _speed;
     private float _initTime;
@@ -35,14 +35,14 @@ public class BulletStraight : WeaponProjectile
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        WeaponProjectile projectile = collision.gameObject.GetComponent<WeaponProjectile>();
+        Projectile projectile = collision.gameObject.GetComponent<Projectile>();
         if (projectile != null && projectile.IsPlayerProjectile != IsPlayerProjectile)
         {
             Destroy(gameObject);
             EffectManager.tinyImpact?.Invoke(transform.position); //spawn explosion effect
             return;
         }
-            IDamagable damagable = collision.transform.GetComponent<IDamagable>();
+        IDamagable damagable = collision.transform.GetComponent<IDamagable>();
         if (damagable != null)
         {
             if ((damagable.GetType() == typeof(PlayerController) && isPlayerProjectile) ||

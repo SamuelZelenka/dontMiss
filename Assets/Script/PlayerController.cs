@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour, IDamagable
     private float _lastDamageTakenTime = 0;
     private SpriteRenderer _spriteRenderer;
 
-    [SerializeField] private WeaponTemplate _weapon;
     [SerializeField] private Transform[] _muzzlePoints;
 
     [SerializeField] private UIViewer _ui;
@@ -40,7 +39,7 @@ public class PlayerController : MonoBehaviour, IDamagable
             _targetMovementDirection += Vector3.right * Input.GetAxis("Horizontal") * Data.MovementSpeed * Time.deltaTime;
             _targetMovementDirection += Vector3.up * Input.GetAxis("Vertical") * Data.MovementSpeed * Time.deltaTime;
         }
-        if (Input.GetKey(KeyCode.Space) && Time.time > _lastShotTime + _weapon.GetFireRate() / _muzzlePoints.Length)
+        if (Input.GetKey(KeyCode.Space)) //Time.time > _lastShotTime + _weapon.GetFireRate() / _muzzlePoints.Length)
         {
             _lastShotTime = Time.time;
             Shoot();
@@ -90,7 +89,6 @@ public class PlayerController : MonoBehaviour, IDamagable
     private void Shoot()
     {
         _muzzleIndex = ((_muzzleIndex + 1) % _muzzlePoints.Length);
-        _weapon.Shoot(_muzzlePoints[_muzzleIndex], true).player = this;
     }
     private void ClampPosition()
     {

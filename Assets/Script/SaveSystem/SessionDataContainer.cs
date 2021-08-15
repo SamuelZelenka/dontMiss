@@ -134,6 +134,18 @@ public class SessionDataContainer
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
+    public Weapon Weapon
+    {
+        get
+        {
+            return _weapon;
+        }
+        set
+        {
+            _weapon = value;
+            GameSession.Instance?.OnStatsChange?.Invoke();
+        }
+    }
     public void AddUpgrade(Upgradable upgrade)
     {
         _upgrades.Add(upgrade.ToString());
@@ -175,6 +187,7 @@ public class SessionDataContainer
     [SerializeField] private int _currentArmor;
     [SerializeField] private int _money;
     [SerializeField] private float _movementSpeed;
+    [SerializeField] private Weapon _weapon;
     [SerializeField] private List<string> _upgrades;
     [SerializeField] private MissionProgressionData _missionProgression;
 
