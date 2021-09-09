@@ -31,7 +31,6 @@ public class MainMenuScript : MonoBehaviour
     {
         currentSession = FindObjectOfType<GameSession>();
         currentSession.OnDataLoad += UpdateVesselInfo;
-        UpdateVesselInfo();
     }
     private void OnDisable()
     {
@@ -46,6 +45,7 @@ public class MainMenuScript : MonoBehaviour
         }
     }
 
+    //Set Default values
     public void NewGame()
     {
         if (_nameInput.text != "" && _nameInput.text.Length > 3)
@@ -59,11 +59,14 @@ public class MainMenuScript : MonoBehaviour
             newData.VesselArmor = 100;
             newData.Money = 800;
             newData.MovementSpeed = 3;
+            newData.Damage = 1;
           
             newData.MissionProgression = new MissionProgressionData();
             newData.MissionProgression.AddMission(new Vector2Int(MissionGrid.GRIDSIZE / 2, MissionGrid.GRIDSIZE / 2), "DebugMission");
 
             newData.MissionProgression.SetPlayerPos(newData.MissionProgression.GetMission(0).position);
+
+            newData.Weapon = new Weapon(1, 0.08f, new AlternateMuzzle().ToString(), "", new DefaultBullet().ToString() );
 
             SaveSystem.SaveSessionData(newData);
             GameSession.Instance.LoadData(newData.VesselName);

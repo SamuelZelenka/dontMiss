@@ -88,7 +88,8 @@ public class PlayerController : MonoBehaviour, IDamagable
     }
     private void Shoot()
     {
-        _muzzleIndex = ((_muzzleIndex + 1) % _muzzlePoints.Length);
+        _muzzleIndex = (_muzzleIndex + 1) % _muzzlePoints.Length;
+        GameSession.Instance.sessionData.Weapon.Fire(_muzzlePoints, GameSession.Instance.sessionData.Damage, true);
     }
     private void ClampPosition()
     {

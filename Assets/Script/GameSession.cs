@@ -42,8 +42,6 @@ public class GameSession : MonoBehaviour
     public static string GetRandomMission() => ReferenceLibrary.Instance.allMissions[Random.Range(0, ReferenceLibrary.Instance.allMissions.Length)];
     private void Awake()
     {
-        
-        LoadData(sessionData.VesselName);
         if (_instance != null && _instance != this)
         {
             Destroy(this.gameObject);
@@ -52,6 +50,7 @@ public class GameSession : MonoBehaviour
         {
             _instance = this;
         }
+
         DontDestroyOnLoad(this.gameObject);
     }
 }

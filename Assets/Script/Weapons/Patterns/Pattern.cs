@@ -6,9 +6,5 @@ public abstract class Pattern
 {
 
     protected bool isFiring;
-
-    public abstract void Trigger(Projectile projectile, Vector3 pos, float fireRate);
-    public abstract void Trigger(Projectile projectile, Vector3[] pos, float fireRate);
-
-
+    public abstract void Trigger(Projectile projectile, Transform[] pos, float fireRate, int damage, bool isPlayer);
 }

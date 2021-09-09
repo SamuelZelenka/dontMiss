@@ -65,4 +65,8 @@ public class DefaultBullet : Projectile
             Destroy(gameObject);
         }
     }
+    public override string ToString()
+    {
+        return "DefaultBullet";
+    }
 }

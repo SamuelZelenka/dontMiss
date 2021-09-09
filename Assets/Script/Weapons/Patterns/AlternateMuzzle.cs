@@ -5,14 +5,16 @@ using UnityEngine;
 public class AlternateMuzzle : Pattern
 {
     private int _muzzleIndex = 0;
-    public override void Trigger(Projectile projectile, Vector3 muzzlePos, float fireRate)
-    {
-        throw new System.NotImplementedException();
-    }
 
-    public override void Trigger(Projectile projectile, Vector3[] muzzlePos, float fireRate)
+    public override void Trigger(Projectile projectile, Transform[] muzzlePos, float fireRate, int damage, bool isPlayer)
     {
         _muzzleIndex = (_muzzleIndex + 1) % muzzlePos.Length;
-        Object.Instantiate(projectile, muzzlePos[_muzzleIndex], Quaternion.Euler(Vector3.zero));
+        Projectile newProjectile = Object.Instantiate(projectile, muzzlePos[_muzzleIndex].position, Quaternion.Euler(Vector3.zero)) ;
+        newProjectile.Init(10, 2, muzzlePos[_muzzleIndex].rotation, damage, isPlayer);
     }
+    public override string ToString()
+    {
+        return "AlternateMuzzle";
+    }
+   
 }

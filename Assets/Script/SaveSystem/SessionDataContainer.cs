@@ -122,6 +122,18 @@ public class SessionDataContainer
             GameSession.Instance?.OnStatsChange?.Invoke();
         }
     }
+    public int Damage
+    {
+        get
+        {
+            return _damage;
+        }
+        set
+        {
+            _damage = value;
+            GameSession.Instance?.OnStatsChange?.Invoke();
+        }
+    }
     public float MovementSpeed
     {
         get
@@ -186,6 +198,8 @@ public class SessionDataContainer
     [SerializeField] private int _currentHP;
     [SerializeField] private int _currentArmor;
     [SerializeField] private int _money;
+    [SerializeField] private int _damage;
+
     [SerializeField] private float _movementSpeed;
     [SerializeField] private Weapon _weapon;
     [SerializeField] private List<string> _upgrades;

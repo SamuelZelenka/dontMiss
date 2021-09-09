@@ -15,7 +15,7 @@ public class CatmullSpline
 		_connectionID = connectionID;
 	}
 
-	// Get a point on a curve between P0-P3 where t is betweeon 0 and 1 and represents how far along the line we've traveled. Some math genius figured this one out for us. Might as well summon a demon.
+	// Get a point on a curve between P0-P3 where t is betweeon 0 and 1 and represents how far along the line we've traveled. Some math genius figured this one out. Might as well summon a demon.
 	public static Vector3 GetCatmullRomPosition(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
 	{
 		Vector3 a = 2f * p1;
